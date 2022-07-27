@@ -1,0 +1,45 @@
+pipeline{
+    agent any
+    stages{
+        stage ('Get Source SVN'){
+            steps{
+                dir('code-font'){
+                      git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-sso/'
+                  }
+            }
+          }
+          stage('Docker Build Image') {
+              steps {
+                  script {
+                      dockerapp = docker.build("cezarfelps/treelogy-sso-sanbox:${env.BUILD_ID}",
+                        '-f ./deploy/Dockerfile .')
+                  }
+              }
+          }
+          stage('Docker Push Image') {
+              steps {
+                  script {
+                          docker.withRegistry('https://registry.hub.docker.com', 'treelogy-sandbox-docker-hub') {
+                          dockerapp.push('latest')
+                          dockerapp.push("${env.BUILD_ID}")
+                      }
+                  }
+              }
+          }
+        stage ('Deploy Kubernetes'){
+          agent {
+            kubernetes {
+              cloud 'kubernetes'
+            }
+          }
+          environment {
+                tag_version = "${env.BUILD_ID}"
+            }
+            steps{
+                sh 'sed -i "s/{{tag}}/$tag_version/g" deploy/deployment.yaml'
+                sh 'cat deploy/deployment.yaml'
+                kubernetesDeploy configs: 'deploy/deployment.yaml', kubeconfigId: 'treelogy-sandbox-kubeconfig-rancher'
+            }
+        }
+    }
+}
