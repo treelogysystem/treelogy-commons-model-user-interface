@@ -3,24 +3,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: go-server
-  #namespace: go
+  name: angular-server
+  namespace: treelogy-template
   labels:
-    app: goapi
+    app: angularapi
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: goapi
+      app: angularapi
   template:
     metadata:
       labels:
-        app: goapi
+        app: angularapi
     spec:
       imagePullSecrets:
       - name: pipeline-docker-registry
       containers:
-      - name: goapi
+      - name: angularapi
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
         - containerPort: 80
@@ -29,11 +29,11 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: go-service
-  #namespace: go
+  name: angular-service
+  namespace: treelogy-template
 spec:
   selector:
-    app: goapi
+    app: angularapi
   type: ClusterIP
   ports:
     - protocol: TCP
@@ -45,16 +45,16 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  #namespace: go
-  name: go-ingress
+  namespace: treelogy-template
+  name: angular-ingress
   annotations:
     allow.http: "false"
 spec:
   rules:
-  - host: go.rancher.treelogy.eco.br
+  - host: angular.rancher.treelogy.eco.br
     http:
       paths:
         - path: /
           backend:
-            serviceName: go-service
+            serviceName: angular-service
             servicePort: 80

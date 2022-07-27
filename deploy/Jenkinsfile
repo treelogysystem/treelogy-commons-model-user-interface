@@ -1,11 +1,11 @@
 pipeline{
     agent any
     stages{
-        stage ('Get Source SVN'){
+        stage ('Source Code'){
             steps{
-                dir('code-font'){
+                dir('code-source'){
                       git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-sso/'
-                  }
+                 }
             }
           }
           stage('Docker Build Image') {
