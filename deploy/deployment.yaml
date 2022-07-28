@@ -30,7 +30,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: angular-service
-  namespace: treelogy-template
+  namespace: treelogy-template:latest
 spec:
   selector:
     app: angularapi
