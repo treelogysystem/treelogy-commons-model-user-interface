@@ -12,7 +12,6 @@ pipeline{
             steps{
                 script {
                       //sh 'nvm ls'
-                      sh 'node --version'
                       sh 'yarn install'
                       sh 'yarn run build'
                   }
