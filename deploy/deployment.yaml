@@ -21,7 +21,7 @@ spec:
       - name: pipeline-docker-registry
       containers:
       - name: angularapi
-        image: cezarfelps/treelogy-template
+        image: cezarfelps/treelogy-template:{{tag}}
         ports:
         - containerPort: 80
 
@@ -30,7 +30,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: angular-service
-  namespace: treelogy-template:latest
+  namespace: treelogy-template
 spec:
   selector:
     app: angularapi
