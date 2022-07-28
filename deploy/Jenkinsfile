@@ -1,4 +1,4 @@
-properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
+properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/2 * * * *')])])
 
 pipeline{
     agent any
@@ -13,7 +13,7 @@ pipeline{
           stage('Docker Build Image') {
               steps {
                   script {
-                      dockerapp = docker.build("cezarfelps/treelogy-template:${env.BUILD_ID}",
+                      dockerapp = docker.build("cezarfelps/treelogy-template-front:${env.BUILD_ID}",
                         '-f ./deploy/Dockerfile .')
                   }
               }
