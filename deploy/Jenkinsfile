@@ -5,6 +5,10 @@ pipeline{
             steps{
                 dir('code-source'){
                       git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-sso/'
+                      script {
+                      sh './hello-world npm install'
+                      sh './hello-world npm run build'
+                  }
                  }
             }
           }
