@@ -11,7 +11,6 @@ pipeline{
           stage ('Build Project'){
             steps{
                 script {
-                      sh 'yarn add --network-timeout 100000'
                       sh 'yarn install'
                       sh 'yarn run build'
                   }
