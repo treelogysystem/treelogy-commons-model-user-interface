@@ -12,7 +12,7 @@ pipeline{
             steps{
                 script {
                       sh 'cd hello-world'
-                      sh 'npm run build'
+                      sh 'npm run build hello-world/'
                   }
             }
           }
