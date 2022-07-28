@@ -21,7 +21,7 @@ spec:
       - name: pipeline-docker-registry
       containers:
       - name: angularapi
-        image: treelogy-template
+        image: cezarfelps/treelogy-template
         ports:
         - containerPort: 80
 
