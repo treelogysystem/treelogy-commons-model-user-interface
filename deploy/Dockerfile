@@ -1,2 +1,2 @@
 FROM nginx:alpine
-COPY ./dist/hello-world ./usr/share/nginx/html
+COPY .hello-world/dist/hello-world ./usr/share/nginx/html
