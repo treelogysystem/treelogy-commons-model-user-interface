@@ -11,8 +11,9 @@ pipeline{
           stage ('Build Project'){
             steps{
                 script {
-                      sh 'cd hello-world'
-                      sh 'npm run build hello-world/'
+                      sh 'cd hello-world/'
+                      sh 'ls'
+                      sh 'npm run build'
                   }
             }
           }
