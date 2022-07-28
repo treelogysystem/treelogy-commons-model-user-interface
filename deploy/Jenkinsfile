@@ -11,7 +11,8 @@ pipeline{
           stage ('Build Project'){
             steps{
                 script {
-                      sh 'cd /hello-world'
+                      sh 'ls'
+                      sh 'cd hello-world/'
                       sh 'ls'
                       sh '~/treelogy-template/hello-world$ npm install'
                       sh '~/treelogy-template/hello-world$ npm run build'
