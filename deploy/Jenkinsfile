@@ -4,7 +4,7 @@ pipeline{
         stage ('Source Code'){
             steps{
                 dir('code-source'){
-                      git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-sso/'
+                      git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-template/'
                       script {
                       sh './treelogy-template/hello-world npm install'
                       sh './treelogy-template/hello-world npm run build'
