@@ -11,6 +11,9 @@ pipeline{
           stage ('Build Project'){
             steps{
                 script {
+
+                        
+                      sh '~/treelogy-template/hello-world$ npm install'
                       sh 'npm run build /var/lib/jenkins/workspace/treelogy-template/hello-world'
                   }
             }
