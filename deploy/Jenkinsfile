@@ -11,7 +11,7 @@ pipeline{
           stage ('Build Project'){
             steps{
                 script {
-                      //sh 'nvm ls'
+                      System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL", "86400")
                       sh 'yarn install'
                       sh 'yarn run build'
                   }
