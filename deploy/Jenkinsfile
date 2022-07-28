@@ -22,7 +22,7 @@ pipeline{
               steps {
                   script {
                           docker.withRegistry('https://registry.hub.docker.com', 'treelogy-sandbox-docker-hub') {
-                          //dockerapp.push('latest')
+                          dockerapp.push('latest')
                           dockerapp.push("${env.BUILD_ID}")
                       }
                   }
@@ -35,11 +35,11 @@ pipeline{
             }
           }
           environment {
-                tag_version = "${env.BUILD_ID}"
+                image = "${env.BUILD_ID}"
             }
             steps{
                 //sed "s/{{BITBUCKET_COMMIT}}/${env.BUILD_ID}/g" | kubectl apply -f
-                sh 'sed -i "s/{{tag}}/${env.BUILD_ID}/g" deploy/deployment.yaml'
+                sh 'sed -i "s/{{image}}/${image} /g" deploy/deployment.yaml'
                 sh 'cat deploy/deployment.yaml'
                 kubernetesDeploy configs: 'deploy/deployment.yaml', kubeconfigId: 'treelogy-sandbox-kubeconfig-rancher'
             }
