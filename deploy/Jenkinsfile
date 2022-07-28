@@ -8,10 +8,17 @@ pipeline{
                  }
             }
           }
+          stage ('Build Project'){
+            steps{
+                script {
+                      sh 'npm run build'
+                  }
+            }
+          }
           stage('Docker Build Image') {
               steps {
                   script {
-                      dockerapp = docker.build("cezarfelps/treelogy-sso-sanbox:${env.BUILD_ID}",
+                      dockerapp = docker.build("cezarfelps/treelogy-template:${env.BUILD_ID}",
                         '-f ./deploy/Dockerfile .')
                   }
               }
