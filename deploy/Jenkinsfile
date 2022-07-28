@@ -6,7 +6,7 @@ pipeline{
         stage ('Source Code'){
             steps{
                 dir('code-source'){
-                      git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-template/'
+                      git branch: 'development', credentialsId: 'treelogy-sandbox-github', url: 'https://github.com/treelogysystem/treelogy-template-front/'
                  }
             }
           }
