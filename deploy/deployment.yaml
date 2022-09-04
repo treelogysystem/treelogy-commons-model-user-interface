@@ -4,7 +4,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: treelogy-template-front-server
-  namespace: treelogy-support-servers
+  namespace: treelogy-template
   labels:
     app: treelogy-template-front-api
 spec:
@@ -30,7 +30,7 @@ kind: Service
 apiVersion: v1
 metadata:
   name: treelogy-template-front-service
-  namespace: treelogy-support-servers
+  namespace: treelogy-template
 spec:
   selector:
     app: treelogy-template-front-api
@@ -45,7 +45,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  namespace: treelogy-support-servers
+  namespace: treelogy-template
   name: treelogy-template-front-ingress
   annotations:
     allow.http: "false"
