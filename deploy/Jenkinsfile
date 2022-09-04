@@ -41,7 +41,7 @@ pipeline{
                 //sed "s/{{BITBUCKET_COMMIT}}/${env.BUILD_ID}/g" | kubectl apply -f
                 sh 'sed -i "s/{{tag}}/${tag} /g" deploy/deployment.yaml'
                 sh 'cat deploy/deployment.yaml'
-                kubernetesDeploy configs: 'deploy/deployment.yaml', kubeconfigId: 'treelogy-sandbox-kubeconfig-rancher'
+                sh 'kubectl apply -f deploy/deployment.yaml'
             }
         }
     }
