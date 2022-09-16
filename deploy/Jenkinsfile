@@ -26,7 +26,7 @@ pipeline{
                 tag = "${env.BUILD_ID}"
             }
             steps {
-                withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://rancher.treelogy.eco.br']) {
+                withKubeConfig([credentialsId: 'kube', serverUrl: 'https://rancher.treelogy.eco.br']) {
                   sh 'sed -i "s/{{tag}}/${tag} /g" deploy/deployment.yaml'
                   sh 'cat deploy/deployment.yaml'
 			      sh 'kubectl apply -f deploy/deployment.yaml'
