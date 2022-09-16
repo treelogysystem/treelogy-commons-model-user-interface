@@ -14,7 +14,7 @@ pipeline{
           stage('Docker Push Image') {
               steps {
                   script {
-                          docker.withRegistry('https://registry.hub.docker.com', 'treelogy-sandbox-docker-hub') {
+                          docker.withRegistry('https://registry.hub.docker.com', 'treelogy-docker-hub') {
                           dockerapp.push('latest')
                           dockerapp.push("${env.BUILD_ID}")
                       }
@@ -26,7 +26,6 @@ pipeline{
                 tag = "${env.BUILD_ID}"
             }
             steps{
-                //sed "s/{{BITBUCKET_COMMIT}}/${env.BUILD_ID}/g" | kubectl apply -f
                 sh 'sed -i "s/{{tag}}/${tag} /g" deploy/deployment.yaml'
                 sh 'cat deploy/deployment.yaml'
                 sh 'kubectl apply -f deploy/deployment.yaml'
